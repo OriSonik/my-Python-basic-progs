@@ -88,7 +88,7 @@ def main():
                 npc = database_npc.npc_database[current_board[future_x][future_y]]
                 npc_dictionary[npc_key] = npc
             extras.how_is_the_npc_hp(npc)
-            engine.player_vs_npc(player, npc)   
+            engine.player_vs_npc(player, npc, current_board)   
             print(npc)
         
         util.clear_screen()

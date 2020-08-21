@@ -69,12 +69,12 @@ def attack(attacker, defender):
 def fight_is_over(attacker, defender):
     return defender['hp'] == 0
 
-def player_vs_npc(player, npc):
+def player_vs_npc(player, npc, board):
     if player['hp'] > 0 and npc['hp'] > 0:    
         attack(player, npc)
         if fight_is_over(player, npc):
             print('You have won this fight. The legend grows in glory... ')
-            remove_npc_from_board(npc)
+            remove_npc_from_board(npc, player, board)
             
         attack(npc, player)
         if fight_is_over(npc, player):
@@ -82,9 +82,9 @@ def player_vs_npc(player, npc):
     
         
 
-def remove_npc_from_board(npc):
-        npc['icon'] = database_items.fuertillons # DO ZMIANY --- bo chyba tylko podmieni ikonkę ;P
-
+def remove_npc_from_board(npc, player, board):
+        npc['icon'] = '.'
+        player['inventory']['fuertillons'] += npc['value'] 
 def choose_weapon_to_use(player, weapon):
     weapons_dictionary = {}
     for item in database_items.item_database: 
