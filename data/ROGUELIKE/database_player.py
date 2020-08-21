@@ -10,7 +10,7 @@ def create_player():
         'icon': PLAYER_ICON, 
         'position': (PLAYER_START_X, PLAYER_START_Y), 
         'inventory': {
-            'fuertillons' : 50,
+            'fuertillons': 50,
             'small_hp_potion': 2,
             
         },
