@@ -21,6 +21,7 @@ def main():
     npc_dictionary = {}
     
     is_running = True
+    npc = None
     while is_running:
 
         x, y = player['position']
@@ -30,9 +31,10 @@ def main():
         print('Current Howling Forest Region: ',extras.board_level_info(board_list, current_board))
         extras.how_is_the_hp(player)
         extras.print_player_stats(player)
-        if engine.is_occupied_by_npc(current_board, future_x, future_y):
-            npc = current_board[future_x][future_y]
+        if npc:
             extras.how_is_the_npc_hp(npc)
+            if engine.fight_is_over:
+                npc = None
         database_player.put_player_on_board(current_board, player)
         ui.display_board(current_board)
 
@@ -54,6 +56,8 @@ def main():
         elif key == 'h':
             extras.help()
             util.press_any_key()
+        elif key == 'k':
+            engine.use
         else:
             pass
         engine.remove_player_from_board(current_board, player)            
@@ -78,19 +82,28 @@ def main():
             else: 
                 engine.move_player_to(player, future_x, future_y)
                 if current_board[future_x][future_y] in database_items.item_database:           
-                    engine.put_item_into_the_inv(player, database_items.item_database[current_board[future_x][future_y]])
-        
+                    item = database_items.item_database[current_board[future_x][future_y]]
+                    if item['type'] == 'sword':
+                        engine.choose_weapon_to_use(player, item)
+                    elif item['type'] == 'shield':
+                        engine.choose_shield_to_use(player, item)
+                   # elif item['type'] == 'upgrade':
+                   #     XXXXXXXXXXXX
+                    else:
+                        engine.put_item_into_the_inv(player, item)
+                    
+
         elif engine.is_occupied_by_npc(current_board, future_x, future_y):
             npc_key = extras.encode_location(board_list, current_board, future_x, future_y)
             if npc_key in npc_dictionary:
                 npc = npc_dictionary[npc_key]
             else:
-                npc = database_npc.npc_database[current_board[future_x][future_y]]
+                npc = database_npc.npc_database[current_board[future_x][future_y]].copy()
                 npc_dictionary[npc_key] = npc
             extras.how_is_the_npc_hp(npc)
-            engine.player_vs_npc(player, npc, current_board)   
-            print(npc)
-        
+            engine.player_vs_npc(player, npc, future_x, future_y)   
+            if player['hp'] == 0:
+                is_running = False            
         util.clear_screen()
 
 if __name__ == '__main__':

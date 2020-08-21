@@ -54,7 +54,10 @@ def define_npc(player, npc):
         pass
 
 def is_occupied_by_npc(board, x, y):
-    return board[x][y] in database_npc.npc_database.keys()
+    try:
+        return board[x][y] in database_npc.npc_database.keys()
+    except IndexError:
+        return False
 
 def attack(attacker, defender):
     damage = attacker['str'] - defender['def']    
@@ -66,58 +69,42 @@ def attack(attacker, defender):
 
     defender['hp'] -= damage
     
-def fight_is_over(attacker, defender):
+def fight_is_over(defender):
     return defender['hp'] == 0
 
-def player_vs_npc(player, npc, board):
-    if player['hp'] > 0 and npc['hp'] > 0:    
-        attack(player, npc)
-        if fight_is_over(player, npc):
-            print('You have won this fight. The legend grows in glory... ')
-            remove_npc_from_board(npc, player, board)
-            
-        attack(npc, player)
-        if fight_is_over(npc, player):
-            print('You lost... and have become a tasty snack for wolves...')
-    
+def player_vs_npc(player, npc, future_x, future_y):
+    attack(player, npc)
+    if fight_is_over(npc):
+        print('You have won this fight. The legend grows... ')
+        remove_npc_from_board(npc, player, future_x, future_y)
         
+    attack(npc, player)
+    if fight_is_over(player):
+        print('You lost... and have become a tasty snack for wolves...')
+    
 
-def remove_npc_from_board(npc, player, board):
-        npc['icon'] = '.'
-        player['inventory']['fuertillons'] += npc['value'] 
+def remove_npc_from_board(npc, player, future_x, future_y):
+    move_player_to(player, future_x, future_y)
+    player['inventory']['fuertillons'] += npc['value'] 
+
 def choose_weapon_to_use(player, weapon):
-    weapons_dictionary = {}
-    for item in database_items.item_database: 
-        item = k, v
-        weapon = item 
-        for weapon in player['inventory']:
-            for k, v in weapon:
-                if v == 'sword':
-                    weapons_dictionary.update(weapon)    
-                    max_value = max(weapons_dictionary, value=lambda v: weapons_dictionary[v])
-                    min_value = min(weapons_dictionary, value=lambda v: weapons_dictionary[v])
-                    player['str'] += max_value
-                    player['str'] -= min_value
-    return player['str']
+    if weapon['str'] > player['gear']['sword']['str']:
+        player['str'] -= player['gear']['sword']['str']
+        player['str'] += weapon['str']
+        player['gear']['sword'] = weapon
 
 def choose_shield_to_use(player, shield):
-    shields_dictionary = {}
-    for item in database_items.item_database:
-        item = k, v
-        shield = item 
-        for shield in player['inventory']:
-            for k, v in shield:
-                if v == 'shield':
-                    shields_dictionary.update(shield)    
-                    max_value = max(shields_dictionary, value=lambda v: shields_dictionary[v])
-                    min_value = min(shields_dictionary, value=lambda v: shields_dictionary[v])
-                    player['def'] += max_value
-                    player['def'] -= min_value
-    return player['def']
+    if shield['def'] > player['gear']['shield']['def']:
+        player['def'] -= player['gear']['shield']['def']
+        player['def'] += shield['def']
+        player['gear']['shield'] = shield
 
-def use_item_from_inventory(player, item):
-    pass
-
+def use_item_from_inventory(player, item_name):
+    if item_name in player['inventory']:
+        icon = '\u001b[31mH\u001b[0m' #TO DO HP POT
+        item = database_items.item_database[icon]   
+        # update player stats
+        # deduct item from inv
 def take_quest_from_npc(player, npc, item):
     pass
 

@@ -1,4 +1,5 @@
 import extras
+import database_items
 
 PLAYER_ICON = '\u001b[47m\u001b[35m@\u001b[0m'
 PLAYER_START_X = 3
@@ -11,12 +12,15 @@ def create_player():
         'position': (PLAYER_START_X, PLAYER_START_Y), 
         'inventory': {
             'fuertillons': 50,
-            'small_hp_potion': 2,
-            
+            'small_hp_potion': 2,    
+        },
+        'gear': {
+            'sword': database_items.sword,
+            'shield': database_items.shield,
         },
         'hp': 1000,
-        'str' : 100,
-        'def': 20,
+        'str' : 100 + database_items.sword['str'],
+        'def': 20 + database_items.shield['def'],
     }
 
 def put_player_on_board(board, player):
