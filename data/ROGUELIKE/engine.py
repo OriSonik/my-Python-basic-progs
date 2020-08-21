@@ -70,15 +70,17 @@ def fight_is_over(attacker, defender):
     return defender['hp'] == 0
 
 def player_vs_npc(player, npc):
-    attack(player, npc)
-    util.press_any_key()
-    if fight_is_over(player, npc):
-        print('You have won this fight. The legend grows in glory... ')
-        remove_npc_from_board(npc)
-    attack(npc, player)
-    util.press_any_key()
-    if fight_is_over(npc, player):
-        print('You lost... and have become a tasty snack for wolves...')
+    if player['hp'] > 0 and npc['hp'] > 0:    
+        attack(player, npc)
+        if fight_is_over(player, npc):
+            print('You have won this fight. The legend grows in glory... ')
+            remove_npc_from_board(npc)
+            
+        attack(npc, player)
+        if fight_is_over(npc, player):
+            print('You lost... and have become a tasty snack for wolves...')
+    
+        
 
 def remove_npc_from_board(npc):
         npc['icon'] = database_items.fuertillons # DO ZMIANY --- bo chyba tylko podmieni ikonkę ;P
