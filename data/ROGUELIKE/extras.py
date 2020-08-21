@@ -52,7 +52,11 @@ def how_is_the_npc_hp(npc):
     else:
         colour = '\u001b[42m'
     i = npc['hp']/25
-    reset_index = int(npc['hp']/i)+1
+    try:
+        reset_index = int(npc['hp']/i)+1
+    except ZeroDivisionError:
+        reset_index = 1
+        
     s = s[:reset_index] + '\u001b[0m' + s[reset_index:]
     s = s[:1] + colour + s[1:]
     print(s, int(100 * (npc['hp']) / (npc['max_hp'])),'%')
