@@ -39,18 +39,11 @@ def put_item_into_the_inv(player, item):
         player['inventory'][item['name']] += value
 
 def deduct_item_from_the_inv(player, item):
-    if 'value' in item:
-        value = -(item['value'])
-    else:
-        value = -1
-    
-    if item['name'] not in player['inventory']: 
-        pass
-    else:
-        player['inventory'][item['name']] += value
-        if item['value'] in player['inventory'] == 0:
+    if item['name'] in player['inventory']:
+        if player['inventory'][item['name']] >= 2:
+            player['inventory'][item['name']] -= 1
+        else:
             del player['inventory'][item['name']]
-            del player['inventory'][item['value']]
     
 def player_has_item(player, item):
     return item['name'] in player['inventory']
@@ -114,17 +107,18 @@ def choose_shield_to_use(player, shield):
 
 def use_item_from_inventory(player, item):
     if item['name'] in player['inventory']:
-        if item['value'] >= 1:
-            if item['name'] == 'small_hp_potion':
-                if player['hp'] <= 900:
-                    player['hp'] += database_items.small_hp_potion['hp']
-                elif player['hp'] in range(901,1000):
-                    player['hp'] = 1000
-            elif item['name'] == 'hp_potion':
-                if player['hp'] <= 800:
-                    player['hp'] += database_items.hp_potion['hp']
-                elif player['hp'] in range(801,1000):
-                    player['hp'] = 1000
+        if item['name'] == 'small_hp_potion':
+            if player['hp'] <= 900:
+                player['hp'] += database_items.small_hp_potion['hp']
+            elif player['hp'] in range(901,1000):
+                player['hp'] = 1000
+        elif item['name'] == 'hp_potion':
+            if player['hp'] <= 800:
+                player['hp'] += database_items.hp_potion['hp']
+            elif player['hp'] in range(801,1000):
+                player['hp'] = 1000
+        else:
+            pass 
         deduct_item_from_the_inv(player, item)
     else:
         pass

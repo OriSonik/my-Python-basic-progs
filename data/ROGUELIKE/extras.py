@@ -20,7 +20,7 @@ def how_is_the_hp(player):
     reset_index = int(player['hp']/40)+1
     s = s[:reset_index] + '\u001b[0m' + s[reset_index:]
     s = s[:1] + colour + s[1:]
-    print(s, player['hp']/10,'%')
+    print('HP: ',s , player['hp']/10,'%')
 
 def board_level_info(board_list, current_board):
     for k, v in board_list.items():
