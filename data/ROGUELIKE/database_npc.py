@@ -22,6 +22,6 @@ npc_database = {
     '\u001b[1m\u001b[93mW\u001b[0m': howler, '\u001b[1m\u001b[93mA\u001b[0m': thug, '\u001b[1m\u001b[93mM\u001b[0m': mist_guard,
     '\u001b[1m\u001b[92mW\u001b[0m': shadowtail, '\u001b[1m\u001b[92mA\u001b[0m': tough_thug, '\u001b[1m\u001b[92mM\u001b[0m': mist_knight,
     '\u001b[1m\u001b[33mW\u001b[0m': nowherewolf, '\u001b[1m\u001b[33mA\u001b[0m': steroidruid, '\u001b[1m\u001b[33mM\u001b[0m': mist_spectre,
-    '\u001b[1m\u001b[91mV\u001b[0m': boss, '\u001b[7mQ\u001b[0m': mysterious_spirit, '\u001b[7mS\u001b[0m': shadowborn_merchant,
+    '\u001b[7mQ\u001b[0m': mysterious_spirit, '\u001b[7mS\u001b[0m': shadowborn_merchant,
 }
 

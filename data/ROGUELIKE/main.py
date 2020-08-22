@@ -57,7 +57,11 @@ def main():
             extras.help()
             util.press_any_key()
         elif key == 'k':
-            engine.use
+            item = database_items.small_hp_potion
+            engine.use_item_from_inventory(player, item)
+        elif key == 'l':
+            item = database_items.small_hp_potion
+            engine.use_item_from_inventory(player, item)
         else:
             pass
         engine.remove_player_from_board(current_board, player)            
@@ -87,8 +91,8 @@ def main():
                         engine.choose_weapon_to_use(player, item)
                     elif item['type'] == 'shield':
                         engine.choose_shield_to_use(player, item)
-                   # elif item['type'] == 'upgrade':
-                   #     XXXXXXXXXXXX
+                    elif item['type'] == 'upgrade':
+                        engine.add_upgrade_to_stats(player, item)
                     else:
                         engine.put_item_into_the_inv(player, item)
                     

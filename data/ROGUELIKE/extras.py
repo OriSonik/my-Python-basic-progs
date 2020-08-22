@@ -56,7 +56,7 @@ def how_is_the_npc_hp(npc):
            
     s = s[:reset_index] + '\u001b[0m' + s[reset_index:]
     s = s[:1] + colour + s[1:]
-    print(s, int(100 * (npc['hp']) / (npc['max_hp'])),'%')
+    print('OPPONENT:', s, int(100 * (npc['hp']) / (npc['max_hp'])),'%')
 
 def print_player_stats(player):
     print(f"PLAYER'S STRENGTH: {player['str']}, DEFENSE: {player['def']}")

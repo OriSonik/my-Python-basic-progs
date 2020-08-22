@@ -1,8 +1,8 @@
 import random
 
-teleportation_orb = {'name': 'teleportation_orb', 'type': 'tp', 'icon': '\u001b[35m#\u001b[0m'}
-small_hp_potion = {'name': 'small_hp_potion', 'type': 'potion', 'icon': '\u001b[31mh\u001b[0m', 'hp': 100}
-hp_potion = {'name': 'hp_potion', 'type': 'potion', 'icon': '\u001b[31mH\u001b[0m', 'hp': 200}
+teleportation_orb = {'name': 'teleportation_orb', 'type': 'tp', 'icon': '\u001b[35m#\u001b[0m', 'value': 1}
+small_hp_potion = {'name': 'small_hp_potion', 'type': 'potion', 'icon': '\u001b[31mh\u001b[0m', 'hp': 100, 'value': 1}
+hp_potion = {'name': 'hp_potion', 'type': 'potion', 'icon': '\u001b[31mH\u001b[0m', 'hp': 200, 'value': 1}
 sword = {'name': 'sword', 'type': 'sword', 'icon': '\u001b[33mi\u001b[0m', 'str': 10}
 shield = {'name': 'shield', 'type': 'shield', 'icon': '\u001b[33m)\u001b[0m', 'def': 10}
 sword_of_the_mists = {'name': 'sword_of_the_mists', 'type': 'sword', 'icon': '\u001b[33m/\u001b[0m', 'str': 50}
@@ -21,7 +21,7 @@ wall = {'name': 'bridge', 'icon': '\u001b[41m=\u001b[0m'}
 item_database = {
     '\u001b[33m)\u001b[0m': shield, '\u001b[33mi\u001b[0m': sword,
     '\u001b[35m#\u001b[0m': teleportation_orb, '\u001b[31mh\u001b[0m': small_hp_potion,
-    '\u001b[31mH\u001b[0m': hp_potion, '\u001b[33mi\u001b[0m': 'sword', '\u001b[33m/\u001b[0m': sword_of_the_mists, 
+    '\u001b[31mH\u001b[0m': hp_potion, '\u001b[33m/\u001b[0m': sword_of_the_mists, 
     '\u001b[33m|\u001b[0m': sword_of_the_forgotten_hollows, '\u001b[33m!\u001b[0m': sword_of_the_weeping_sacred_willow,
     '\u001b[34m^\u001b[0m': philosopher_s_ice, '\u001b[33m$\u001b[0m': fuertillons,
     '\u001b[34mo\u001b[0m': orchidean_absorber, '\u001b[34mO\u001b[0m': dragonscale_plate,

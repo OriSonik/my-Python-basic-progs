@@ -31,12 +31,26 @@ def put_item_into_the_inv(player, item):
     if 'value' in item:
         value = item['value']
     else:
-        value = 1
+        pass
     
     if item['name'] not in player['inventory']: 
         player['inventory'][item['name']] = value
     else:
         player['inventory'][item['name']] += value
+
+def deduct_item_from_the_inv(player, item):
+    if 'value' in item:
+        value = -(item['value'])
+    else:
+        value = -1
+    
+    if item['name'] not in player['inventory']: 
+        pass
+    else:
+        player['inventory'][item['name']] += value
+        if item['value'] in player['inventory'] == 0:
+            del player['inventory'][item['name']]
+            del player['inventory'][item['value']]
     
 def player_has_item(player, item):
     return item['name'] in player['inventory']
@@ -82,7 +96,6 @@ def player_vs_npc(player, npc, future_x, future_y):
     if fight_is_over(player):
         print('You lost... and have become a tasty snack for wolves...')
     
-
 def remove_npc_from_board(npc, player, future_x, future_y):
     move_player_to(player, future_x, future_y)
     player['inventory']['fuertillons'] += npc['value'] 
@@ -99,12 +112,23 @@ def choose_shield_to_use(player, shield):
         player['def'] += shield['def']
         player['gear']['shield'] = shield
 
-def use_item_from_inventory(player, item_name):
-    if item_name in player['inventory']:
-        icon = '\u001b[31mH\u001b[0m' #TO DO HP POT
-        item = database_items.item_database[icon]   
-        # update player stats
-        # deduct item from inv
+def use_item_from_inventory(player, item):
+    if item['name'] in player['inventory']:
+        if item['value'] >= 1:
+            if item['name'] == 'small_hp_potion':
+                if player['hp'] <= 900:
+                    player['hp'] += database_items.small_hp_potion['hp']
+                elif player['hp'] in range(901,1000):
+                    player['hp'] = 1000
+            elif item['name'] == 'hp_potion':
+                if player['hp'] <= 800:
+                    player['hp'] += database_items.hp_potion['hp']
+                elif player['hp'] in range(801,1000):
+                    player['hp'] = 1000
+        deduct_item_from_the_inv(player, item)
+    else:
+        pass
+                
 def take_quest_from_npc(player, npc, item):
     pass
 
@@ -124,3 +148,5 @@ def idle_hp_regeneration(player, future_x, future_y):
         elif player['hp'] in range(999, 1001):
             player['hp'] = 1000
         
+def add_upgrade_to_stats(player, item):
+    player['def'] += item['def']

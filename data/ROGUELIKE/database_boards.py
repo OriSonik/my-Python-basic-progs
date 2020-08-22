@@ -31,14 +31,14 @@ def create_boards():
     engine.create_item_on_board(board_1, database_items.teleportation_orb, 14, 33)
 
     # set exit from board 1 to 2                                   
-    exit_1_to_2_x = random.randrange(0, len(board_list['1']))
+    exit_1_to_2_x = 3
     exit_1_to_2_y = BOARD_WIDTH-1
     add_exit_to_board(board_list['1'], '2', exit_1_to_2_x, exit_1_to_2_y)
     # set exit from board 2 to 1                                  
     add_exit_to_board(board_list['2'], '1', exit_1_to_2_x, 0)
         
     # set exit from board 2 to 3                                   
-    exit_2_to_3_x = random.randrange(0, len(board_list['2'])-2)
+    exit_2_to_3_x = 3
     exit_2_to_3_y = BOARD_WIDTH-1
     add_exit_to_board(board_list['2'], '3', exit_2_to_3_x, exit_2_to_3_y)    
     # set exit from board 3 to 2                                  
@@ -724,8 +724,23 @@ def board_3_create(board_3):
     engine.create_item_on_board(board_3, database_items.water, 14, 20)
 
     engine.create_item_on_board(board_3, database_items.dragonscale_plate, 6, 14)
-    engine.create_item_on_board(board_3, database_items.sword_of_the_weeping_sacred_willow, 7, 22)
+    engine.create_item_on_board(board_3, database_items.sword_of_the_weeping_sacred_willow, 8, 14)
 
+    engine.create_npc_on_board(board_3, database_npc.boss, 5, 37)
+    engine.create_npc_on_board(board_3, database_npc.boss, 6, 36)
+    engine.create_npc_on_board(board_3, database_npc.boss, 6, 37)
+    engine.create_npc_on_board(board_3, database_npc.boss, 6, 38)
+    engine.create_npc_on_board(board_3, database_npc.boss, 7, 35)
+    engine.create_npc_on_board(board_3, database_npc.boss, 7, 36)
+    engine.create_npc_on_board(board_3, database_npc.boss, 7, 37)
+    engine.create_npc_on_board(board_3, database_npc.boss, 7, 38)
+    engine.create_npc_on_board(board_3, database_npc.boss, 7, 39)
+    engine.create_npc_on_board(board_3, database_npc.boss, 8, 36)
+    engine.create_npc_on_board(board_3, database_npc.boss, 8, 37)
+    engine.create_npc_on_board(board_3, database_npc.boss, 8, 38)
+    engine.create_npc_on_board(board_3, database_npc.boss, 9, 37)
 
+    
+    
 def board_4_create(board_4):
     engine.create_item_on_board(board_4, database_items.tree, 0, 0)
