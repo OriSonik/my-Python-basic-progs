@@ -19,7 +19,7 @@ def create_player():
             'shield': database_items.shield,
         },
         'hp': 1000,
-        'str' : 100 + database_items.sword['str'],
+        'str' : 80 + database_items.sword['str'],
         'def': 20 + database_items.shield['def'],
     }
 
