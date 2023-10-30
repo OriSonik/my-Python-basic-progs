@@ -4,7 +4,7 @@ def decimal_to_binary(dec_num):
         index += 1
     
     bin_num = ''
-
+    
     for n in range(index,-1,-1):
 
         if pow(2, n) <= dec_num:
